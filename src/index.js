@@ -4,7 +4,7 @@ const app = express() // Creates an Express application instance.
 const port = process.env.PORT || 3000
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.send('Hello World! Magic')
 }) // Defines a route (/) that returns Hello, World!.
 
 app.listen(port, () => {
