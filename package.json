@@ -7,7 +7,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "hotStart": "node --env-file=.env --watch Backend/src/index.js",
+    "hotStart": "npx tsx watch --env-file=.env Backend/src/index.ts",
     "drizzlegen": "drizzle-kit generate --config=./Backend/drizzle.config.ts"
   },
   "author": "",
@@ -20,6 +20,7 @@
     "pg": "^8.16.3"
   },
   "devDependencies": {
+    "@types/express": "^5.0.3",
     "drizzle-kit": "^0.31.4",
     "tsx": "^4.20.5"
   }
