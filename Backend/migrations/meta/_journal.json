@@ -8,6 +8,27 @@
       "when": 1758730536257,
       "tag": "0000_fat_gorgon",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1758947832745,
+      "tag": "0001_loose_zaladane",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1758978198482,
+      "tag": "0002_regular_caretaker",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1758986378591,
+      "tag": "0003_far_eddie_brock",
+      "breakpoints": true
     }
   ]
 }
