@@ -1,7 +1,8 @@
 
 import { relations } from "drizzle-orm";
-import { boolean,pgTable, serial, varchar, timestamp, integer, pgSchema } from "drizzle-orm/pg-core";
+import { boolean,pgTable, serial, varchar, timestamp, integer, pgSchema,date, pgEnum } from "drizzle-orm/pg-core";
 
+export const statusEnum = pgEnum("status", ["pending", "completed", "in-progress"]);
 
 export const users = pgTable("users", {
     id: serial("id").primaryKey(),
@@ -10,7 +11,8 @@ export const users = pgTable("users", {
     password: varchar("password", { length: 256 }).notNull(),
     createdAt: timestamp("created_at").defaultNow().notNull(),
     updatedAt: timestamp("updated_at").defaultNow().notNull(),
-    personId: integer("person_id").unique().references(() => persons.id), // one-to-one
+    personId: integer("person_id").unique().notNull().references(() => persons.id), // one-to-one
+    isDeleted: boolean("is_deleted").default(false).notNull() // Add this line
 });
 
 export const persons = pgTable("persons", {
@@ -18,7 +20,8 @@ export const persons = pgTable("persons", {
     name: varchar("name", { length: 50 }).notNull(),
     birthdate: timestamp("birthdate").notNull(),
     gender: varchar("gender", { length: 10 }).notNull(),
-    phoneNo: varchar("phone_no", { length: 15 }).notNull()
+    phoneNo: varchar("phone_no", { length: 15 }).notNull(),
+    isDeleted: boolean("is_deleted").default(false).notNull() // Add this line
 });
 
 export const activities = pgTable("activities", {
@@ -26,13 +29,15 @@ export const activities = pgTable("activities", {
     title: varchar("title", { length: 256 }).notNull(),
     description: varchar("description", { length: 1024 }),
     scheduledAt: timestamp("scheduled_at").notNull(),
+    isDeleted: boolean("is_deleted").default(false).notNull() // Add this lin
 });
 
 export const userActivities = pgTable("user_activities", {
     id: serial("id").primaryKey(),
     userId: integer("user_id").references(() => users.id).notNull(),
     activityId: integer("activity_id").references(() => activities.id).notNull(),
-    status: varchar("status", { length: 50 }).notNull(), // e.g., "pending", "completed"
+    status: varchar("status", { length: 10 }).notNull().default('in-progress'),
+    isDeleted: boolean("is_deleted").default(false).notNull() // Add this line
 });
 
 export const tasks = pgTable("tasks", {
@@ -41,6 +46,7 @@ export const tasks = pgTable("tasks", {
     description: varchar("description", { length: 1024 }),
     isDone: boolean("is_done").default(false).notNull(),
     userActivitiesId: integer("user_activities_id").references(() => userActivities.id).notNull(),
+    isDeleted: boolean("is_deleted").default(false).notNull() // Add this line
 });
 
 //Define relations 
