@@ -7,6 +7,7 @@ import personRoutes from './routing/personRoutes';
 import userRoutes from './routing/userRoutes';
 import activityRoutes from './routing/activityRoutes';
 import userActivityRoutes from './routing/userActivityRoutes';
+import taskRoutes from './routing/taskRoutes';
 
 const app: Express = express();
 const port = process.env.PORT || 3000;
@@ -29,5 +30,5 @@ app.use('/person', personRoutes);
 app.use('/user', userRoutes);
 app.use('/activity', activityRoutes);
 app.use('/user-activity', userActivityRoutes);
-
+app.use('/task', taskRoutes);
 
