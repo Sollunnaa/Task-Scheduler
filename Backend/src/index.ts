@@ -1,8 +1,4 @@
 import express, { Express, Request, Response } from 'express';
-import {eq} from 'drizzle-orm';
-import { createUser } from './controllers/userController';
-import { persons, users } from './Config/schema';
-import db from './db';
 import personRoutes from './routing/personRoutes';
 import userRoutes from './routing/userRoutes';
 import activityRoutes from './routing/activityRoutes';
