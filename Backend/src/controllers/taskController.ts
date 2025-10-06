@@ -5,11 +5,12 @@ import {eq,and} from 'drizzle-orm';
 
 export const createTask = async (req: Request, res: Response) => {
     try {
-        const { title, description, userActivitiesId } = req.body;
+        const { title, description, userActivitiesId, createdByUserId } = req.body;
         const newTask = await db.insert(tasks).values({
             title,
             description,
             userActivitiesId,
+            createdByUserId
         }).returning();
         res.status(201).json(newTask);
     } catch (error) {
@@ -49,12 +50,13 @@ export const editTask = async (req: Request, res: Response) => {
     try {
         const { id } = req.params;
         console.log("Editing task with id:", id);
-        const { title, description, isDone, userActivitiesId } = req.body;
+        const { title, description, isDone, userActivitiesId, createdByUserId } = req.body;
         const updatedTask = await db.update(tasks).set({
             title,
             description,
             isDone,
             userActivitiesId,
+            createdByUserId
         }).where(eq(tasks.id, Number(id))).returning(); 
         if(updatedTask.length === 0) {
           return res.status(404).json({ error: "Task not found" });
@@ -66,6 +68,7 @@ export const editTask = async (req: Request, res: Response) => {
 };
 
 export const softDeleteTask = async (req: Request, res: Response) => {
+  
     try {
         const { id } = req.params;
         const deletedTask = await db.update(tasks).set({

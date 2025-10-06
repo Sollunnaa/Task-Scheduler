@@ -3,14 +3,10 @@
     "target": "ES2022",
     "module": "ESNext",
     "outDir": "dist",
-    "rootDir": "Backend",
+    "rootDir": "",
     "moduleResolution": "node",
     "esModuleInterop": true,
     "strict": true,
     "skipLibCheck": true,
-    "paths": {
-      "@/*": ["./src/*"],
-      "@assets/*": ["./assets/*"]
-    }
   }
 }

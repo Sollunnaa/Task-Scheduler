@@ -5,11 +5,12 @@ import {eq,and} from 'drizzle-orm';
 
 export const createActivity = async (req: Request, res: Response) => {
     try {
-        const { title, description, date, personId } = req.body;    
+        const { title, description, date,createdByUserId } = req.body;    
         const newActivity = await db.insert(activities).values({
             title,
             description,
-            scheduledAt: new Date(date), // Ensure it's a Date object
+            scheduledAt: new Date(date),
+            createdByUserId 
         }).returning();
         res.status(201).json(newActivity);
     } catch (error) {
@@ -47,14 +48,16 @@ export const getActivityById = async (req: Request, res: Response) => {
 };
 
 export const editActivity = async (req: Request, res: Response) => {
+    
     try {
         const { id } = req.params;
         console.log("Editing activity with id:", id);
-        const { title, description, date } = req.body;
+        const { title, description, date,createdByUserId } = req.body;
         const updatedActivity = await db.update(activities).set({   
             title,
             description,
             scheduledAt: new Date(date), 
+            createdByUserId
         }).where(eq(activities.id, Number(id))).returning();
         if(updatedActivity.length === 0) {
           return res.status(404).json({ error: "Activity not found" });
