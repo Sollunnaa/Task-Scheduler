@@ -1,20 +1,9 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import NavBar from "@/components/NavBar";
 
-export default function App() {
+export default function Index() {
   return (
-    <View style={styles.container}>
-      <Text>Lool</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavBar/>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
